@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+#show Japanese words
+<meta charset="utf-8">
+<html>
+
+<head>
+    <title>豊島美術館 | Teshima Art Museum</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="EA2_webMaster.css" title="style" />
+
+    <!-- JavaScript for printing summary for ticket ordering -->
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+
+        function print_result() {
+            var summary = "";
+            var lineBreak = "\r\n";
+
+            var Security = document.f1.Security.value;
+            var SecurityConfirm = document.f1.SecurityConfirm.value;
+
+            if (Security != SecurityConfirm) {
+                alert("The Security Code doesn't Match");
+                return false;
+            }
+
+            var firstName = document.f1.fname.value;
+            var lastName = document.f1.lname.value;
+            summary += "Name: " + firstName + " " + lastName + lineBreak;
+
+            var Date = document.f1.BookingDate.value;
+            summary += "Booking Date: " + Date + lineBreak;
+            // alert("Booking Date = " + Date);
+
+            var Time = document.f1.BookingTime.value;
+            summary += "Booking Time: " + Time + lineBreak;
+            // alert("Booking Time = " + Time);
+
+            var Genderindex = document.f1.Gender.selectedIndex;
+            var GenderText = document.f1.Gender.options[Genderindex].text;
+            summary += "Gender: " + GenderText + lineBreak;
+            //alert("Gender = " + GenderText);
+
+            var AdultNum = document.f1.Adults.value;
+            summary += "Number of Adults: " + AdultNum + lineBreak;
+            //alert("Number of Adults = " + AdultNum);
+
+            var ChildNum = document.f1.Childs.value;
+            summary += "Number of Childs: " + ChildNum + lineBreak;
+
+            summary += "Total = JPY" + (AdultNum * 1570) + (ChildNum * 0) + lineBreak;
+            //alert("Number of Childs = " + ChildNum);
+
+            var typeOfVisitor;
+            if (document.f1.typeOfVisitor[0].checked) {
+                typeOfVisitor = document.f1.typeOfVisitor[0].value;
+            }
+            else {
+                typeOfVisitor = document.f1.typeOfVisitor[1].value;
+            }
+            summary += "Type Of Visitor: " + typeOfVisitor + lineBreak;
+            // alert("SpNeeds = " + SpNeeds);
+
+            var Guideindex = document.f1.Guide.selectedIndex;
+            var GuideText = document.f1.Guide.options[Guideindex].text;
+            summary += "Tour Guide Service: " + GuideText + lineBreak;
+            // alert("Tour Guide Service: " + GuideText);
+
+            var RatingText = document.f1.rating.value;
+            // var RatingText = document.f1.rating.options[RatingIndex].text;
+            summary += "User experience of Reservation system: " + RatingText + lineBreak;
+            // alert("User experience of Reservation system: " + RatingText);
+
+            summary += "Your tickets are ordered. Thank for your purchasing!" + lineBreak;
+            alert(summary);
+        }
+    </script>
+</head>
+
+<body>
+    <img src="logo.png" alt="TeshimaMuseum" style="height:100px" class="center">
+
+    <div class="topnav" id="myTopnav">
+        <a href="EA2_HomePage.html">Home</a>
+        <a href="EA2_ticket.html" class="active">Ticket</a>
+        <a href="EA2_howToGo.html">How to go</a>
+        <a href="EA2_enquiry.html">Enquiry</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <section1>
+        <br>
+        <div class="top-kv_movie">
+            <iframe width="100%"
+                src="https://player.vimeo.com/video/702631350?h=fd4a0f80db&amp;badge=0&amp;control=0&amp;autopause=0&amp;autoplay=1&amp;player_id=0&amp;loop=1&amp;app_id=58479"
+                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+                style="position:absolute;top:0;left:0;width:100%;height:100%;" title="HomepageMovie.mp4">
+            </iframe>
+
+        </div>
+    </section1>
+
+    <div id="BookingSystem">
+        <h2>Order Ticket Online System</h2>
+        <form name="f1" enctype="multpart/form-data" onSubmit="print_result()">
+            <label for="fname">First Name</label>
+            <br>
+            <input type="text" id="fname" name="fname" required="required" pattern=[A-Za-z]{1,}
+                title="Characters with Uppercase / Lowercase" placeholder="Your first name..">
+            <br>
+
+            <label for="lname">Last Name</label>
+            <br>
+            <input type="text" id="lname" name="lname" required="required" pattern="[A-Za-z]{1,}"
+                title="Characters with Uppercase / Lowercase" placeholder="Your last name.."><br>
+
+            <label for="BookingDate">Booking Date</label>
+            <br>
+            <input type="date" id="BookingDate" name="BookingDate" required="required" />
+            <br>
+
+            <label for="BookingTime">Booking Time</label>
+            <br />
+            <input type="time" id="BookingTime" name="BookingTime" required="required" />
+            <br />
+
+            <label for="Gender">Gender</label>
+            <br />
+            <select id="Gender" name="Gender">
+                <option value="M">M</option>
+                <option value="F">F</option>
+            </select>
+            <br />
+
+            <label for="Adults">Number of Adults(Adult - JPY1,570.00):</label>
+            <br />
+            <input type="number" id="Adults" name="Adults" min="1" max="8" required="required"
+                placeholder="Add number of adult..">
+            <br />
+
+            <label for="Childs">Number of Children(Child 15 and under) - JPY 0.00):</label>
+            <br />
+            <input type="number" id="Childs" name="Childs" min="0" max="8" placeholder="Add number of child..">
+            <br />
+
+            <label for="InjectionProof">Vaccine injection proofing for oversea visitor:</label>
+            <br />
+            <input type="file" name="file" id="InjectionProof" required="required" accept="image/*,.pdf"
+                title="file format should be in jpg / pdf">
+            <br />
+
+            <label for="visitor">Type of Visitor:</label>
+            <br />
+            <label class="container">Individual
+                <input type="radio" name="typeOfVisitor" value="Individual" checked="checked">
+                <span class="checkmark"></span>
+            </label>
+            <label class="container">Group
+                <input type="radio" name="typeOfVisitor" value="Group">
+                <span class="checkmark"></span>
+            </label>
+            <br />
+
+            <label for="Requirement">Special Requirement:</label>
+            <br />
+            <textarea value="Requirement" maxlength="250" cols="50" rows="5" placeholder="within 250 words..."
+                required="required"></textarea>
+            <br />
+
+            <label for="Tour Guide Service">Tour Guide Service</label>
+            <br />
+            <select name="Guide" id="Guide" required="required">
+                <optgroup label="Language">
+                    <option value="Japanese">English</option>
+                    <option value="English">Japanese</option>
+                    <option value="Putonghua">Putonghua</option>
+                </optgroup>
+                <optgroup label="Types of Guide">
+                    <option value="On-site Guided Tour">On-site Guided Tour</option>
+                    <option value="Audio guide">Audio guide</option>
+                </optgroup>
+            </select>
+            <br />
+
+            <label for="experience">User Experience of Ordering system</label>
+            <br />
+            <input list="rating list" id="rating" name="rating" placeholder="Good / Average / Poor" required="required">
+            <datalist id="rating list">
+                <option value="Average">
+                <option checked="checked" value="Good">
+                <option value="Poor">
+            </datalist>
+            <br />
+
+            <label for="Security">Security Code</label>
+            <br />
+            <input type="password" name="Security" id="Security" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                required="required" placeholder="Please enter your security code..">
+            <br />
+
+            <label for="SecurityConfirm">Confirm Security Code</label>
+            <br />
+            <input type="password" name="SecurityConfirm" id="SecurityConfirm" required="required"
+                placeholder="Re-enter above security code..">
+            <br />
+
+            <input type="submit" value="Submit">
+            <br />
+            <input type="reset" value="Reset">
+        </form>
+
+        <footer>
+            <h3 style="text-align:center">
+                <a href="EA2_HomePage.html" class="active">Home | </a>
+                <a href="EA2_ticket.html">Ticket | </a>
+                <a href="EA2_howToGo.html">How to go | </a>
+                <a href="EA2_enquiry.html">Enquiry</a>
+            </h3>
+            <p style="text-align:center">© copyright by 210091649 & 210206838, 2022</p>
+        </footer>
+    </div>
+
+</body>
